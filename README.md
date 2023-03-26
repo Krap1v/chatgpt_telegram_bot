@@ -1,6 +1,8 @@
 ## Setup
-1. ```bash git clone https://github.com/Krap1v/chatgpt_telegram_bot
-  ```
+1. Copy this repo
+  ```bash
+    git clone https://github.com/Krap1v/chatgpt_telegram_bot
+    ```
 
 2. Get your [OpenAI API](https://openai.com/api/) key
 
