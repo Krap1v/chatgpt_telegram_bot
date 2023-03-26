@@ -1,5 +1,5 @@
 ## Setup
-1. Copy this repo 
+1. Copy this repo:
    ```bash
    git clone https://github.com/Krap1v/chatgpt_telegram_bot 
    ```
