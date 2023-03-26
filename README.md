@@ -1,7 +1,9 @@
 ## Setup
-1. Copy this repo ```bash git clone https://github.com/Krap1v/chatgpt_telegram_bot ```
+1. Copy this repo 
+   ```bash
+   git clone https://github.com/Krap1v/chatgpt_telegram_bot 
+   ```
    
-
 2. Get your [OpenAI API](https://openai.com/api/) key
 
 3. Get your Telegram bot token from [@BotFather](https://t.me/BotFather)
