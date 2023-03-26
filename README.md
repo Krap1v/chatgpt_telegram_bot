@@ -14,5 +14,5 @@
 
 5. 🔥 And now **run**:
     ```bash
-    docker-compose --env-file config/config.env up --build
+    docker compose --env-file config/config.env up --build
     ```
