@@ -408,7 +408,7 @@ async def show_balance_handle(update: Update, context: CallbackContext):
         n_output_spent_dollars = config.models["info"][model_key]["price_per_1000_output_tokens"] * (n_output_tokens / 1000)
         total_n_spent_dollars += n_input_spent_dollars + n_output_spent_dollars
 
-        details_text += f"- {model_key}: <b>{n_input_spent_dollars + n_output_spent_dollars:.03f}$</b> / <b>{n_input_tokens + n_output_tokens} tokens</b>\n"
+        details_text += f"- {model_key}: <b>{n_input_spent_dollars + n_output_spent_dollars:.03f} рублей</b> / <b>{n_input_tokens + n_output_tokens} токенов</b>\n"
 
     voice_recognition_n_spent_dollars = config.models["info"]["whisper"]["price_per_1_min"] * (n_transcribed_seconds / 60)
     if n_transcribed_seconds != 0:
