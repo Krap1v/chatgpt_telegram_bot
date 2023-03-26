@@ -8,7 +8,7 @@
 
 3. Get your Telegram bot token from [@BotFather](https://t.me/BotFather)
 
-4. Edit `config/config.yml` to set your tokens and run 2 commands below 
+4. Edit `config/config.yml` to set your tokens and run 2 commands below \
    *If you're advanced user, you can also edit* `config/config.env`
 
 
