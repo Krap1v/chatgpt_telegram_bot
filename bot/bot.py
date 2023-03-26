@@ -40,12 +40,10 @@ logger = logging.getLogger(__name__)
 user_semaphores = {}
 
 HELP_MESSAGE = """Commands:
-⚪ /retry – Regenerate last bot answer
-⚪ /new – Start new dialog
-⚪ /mode – Select chat mode
-⚪ /settings – Show settings
-⚪ /balance – Show balance
-⚪ /help – Show help
+⚪ /retry – Повторить последний ответ
+⚪ /new – Начать новый диалог
+⚪ /mode – Тип ассистента
+⚪ /balance – Статистика использования
 """
 
 
@@ -296,7 +294,7 @@ async def new_dialog_handle(update: Update, context: CallbackContext):
     db.set_user_attribute(user_id, "last_interaction", datetime.now())
 
     db.start_new_dialog(user_id)
-    await update.message.reply_text("Starting new dialog ✅")
+    await update.message.reply_text("Начинаю новый диалог ✅")
 
     chat_mode = db.get_user_attribute(user_id, "current_chat_mode")
     await update.message.reply_text(f"{openai_utils.CHAT_MODES[chat_mode]['welcome_message']}", parse_mode=ParseMode.HTML)
@@ -314,7 +312,7 @@ async def show_chat_modes_handle(update: Update, context: CallbackContext):
         keyboard.append([InlineKeyboardButton(chat_mode_dict["name"], callback_data=f"set_chat_mode|{chat_mode}")])
     reply_markup = InlineKeyboardMarkup(keyboard)
 
-    await update.message.reply_text("Select chat mode:", reply_markup=reply_markup)
+    await update.message.reply_text("Выберите режим чата:", reply_markup=reply_markup)
 
 
 async def set_chat_mode_handle(update: Update, context: CallbackContext):
@@ -401,7 +399,7 @@ async def show_balance_handle(update: Update, context: CallbackContext):
     n_used_tokens_dict = db.get_user_attribute(user_id, "n_used_tokens")
     n_transcribed_seconds = db.get_user_attribute(user_id, "n_transcribed_seconds")
 
-    details_text = "🏷️ Details:\n"
+    details_text = "🏷️ Модели:\n"
     for model_key in sorted(n_used_tokens_dict.keys()):
         n_input_tokens, n_output_tokens = n_used_tokens_dict[model_key]["n_input_tokens"], n_used_tokens_dict[model_key]["n_output_tokens"]
         total_n_used_tokens += n_input_tokens + n_output_tokens
@@ -418,8 +416,8 @@ async def show_balance_handle(update: Update, context: CallbackContext):
     
     total_n_spent_dollars += voice_recognition_n_spent_dollars    
 
-    text = f"You spent <b>{total_n_spent_dollars:.03f}$</b>\n"
-    text += f"You used <b>{total_n_used_tokens}</b> tokens\n\n"
+    text = f"Потрачено <b>{total_n_spent_dollars:.03f} рублей</b>\n"
+    text += f"Использовано <b>{total_n_used_tokens}</b> токенов\n\n"
     text += details_text
 
     await update.message.reply_text(text, parse_mode=ParseMode.HTML)
@@ -457,12 +455,10 @@ async def error_handle(update: Update, context: CallbackContext) -> None:
 
 async def post_init(application: Application):
     await application.bot.set_my_commands([
-        BotCommand("/new", "Start new dialog"),
-        BotCommand("/mode", "Select chat mode"),
-        BotCommand("/retry", "Re-generate response for previous query"),
-        BotCommand("/balance", "Show balance"),
-        BotCommand("/settings", "Show settings"),
-        BotCommand("/help", "Show help message"),
+        BotCommand("/new", "Начать новый диалог"),
+        BotCommand("/mode", "Тип ассистента"),
+        BotCommand("/retry", "Повторить ответ на последний запрос"),
+        BotCommand("/balance", "Статистика использования"),
     ])
 
 def run_bot() -> None:
